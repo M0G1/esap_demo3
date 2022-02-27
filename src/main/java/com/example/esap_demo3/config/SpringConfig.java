@@ -51,20 +51,29 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
+
     @Bean
     public ViewResolver getXSLTViewResolver(){
-
         XsltViewResolver xsltResolver = new XsltViewResolver();
-        xsltResolver.setOrder(1);
+        xsltResolver.setOrder(0);
         xsltResolver.setSourceKey("xmlSource");
 
         xsltResolver.setViewClass(XsltView.class);
         xsltResolver.setViewNames("gyms", "season_passes");
-        xsltResolver.setPrefix("/xsl/");
-        xsltResolver.setSuffix(".xsl");
+        xsltResolver.setPrefix("classpath:/xslt/");
+        xsltResolver.setSuffix(".xslt");
 
         return xsltResolver;
     }
+
+
+//    @Bean
+//    public XsltViewResolver xsltViewResolver() {
+//        XsltViewResolver resolver = new XsltViewResolver();
+//        resolver.setPrefix("classpath:/xslt/");
+//        resolver.setSuffix(".xslt");
+//        return resolver;
+//    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
